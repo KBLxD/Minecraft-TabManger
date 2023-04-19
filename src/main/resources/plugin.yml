@@ -1,0 +1,4 @@
+name: TabManger
+version: '${project.version}'
+main: de.kbl.tabmanger.TabManger
+api-version: 1.19
