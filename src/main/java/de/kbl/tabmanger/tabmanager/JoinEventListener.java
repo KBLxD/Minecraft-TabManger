@@ -2,7 +2,6 @@ package de.kbl.tabmanger.tabmanager;
 
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +26,6 @@ public class JoinEventListener implements Listener {
         PlayerTeam playerTeam = PlayerEditor.getUserTeam(player);
 
         for(Player allPlayer : Bukkit.getOnlinePlayers())
-            allPlayer.sendMessage(playerTeam.getTabPrefix() + player.getName() + " ➥ " + msg);
+            allPlayer.sendMessage(playerTeam.getTabPrefix() + player.getName() + " ›› " + msg);
     }
 }

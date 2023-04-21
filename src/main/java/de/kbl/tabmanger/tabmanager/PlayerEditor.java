@@ -33,7 +33,7 @@ public class PlayerEditor {
 
         for(Group group : groups) {
             // format -> name;wight;prefix
-            list.add(group.getName() + ";" + group.getWeight().getAsInt() + ";" + group.getCachedData().getMetaData().getPrefix());
+            list.add(group.getName() + ";" + group.getWeight().getAsInt() + ";" + group.getCachedData().getMetaData().getPrefix()+ ";" + group.getCachedData().getMetaData().getSuffix());
         }
 
 
@@ -53,10 +53,10 @@ public class PlayerEditor {
                 if (player.hasPermission(playerTeam.getPermission()))
                     return playerTeam;
         }
-        return new PlayerTeam(String.valueOf(list.get(list.size() - 1))); // -1 is becaus the List start not at 1
+        return new PlayerTeam(String.valueOf(list.get(list.size() - 1))); // -1 is because the List start not at 1
     }
 
-    /*public static void setTabPrefix(Player player) {
+    public static void setTabPrefix(Player player) {
         Thread thread = new Thread(() -> {
             for (Player target : Bukkit.getOnlinePlayers()) {
                 Scoreboard sb = player.getScoreboard();
@@ -65,6 +65,9 @@ public class PlayerEditor {
                 if (sb.getTeam(team) == null)
                     sb.registerNewTeam(team);
                 sb.getTeam(team).setPrefix(playerTeam.getTabPrefix());
+                sb.getTeam(team).setSuffix(playerTeam.getTabSuffix());
+
+                sb.getTeam(team).setColor(ChatColor.GRAY);
                 sb.getTeam(team).addPlayer(target);
             }
             for (Player target : Bukkit.getOnlinePlayers()) {
@@ -76,35 +79,9 @@ public class PlayerEditor {
                 if (sb.getTeam(team) == null)
                     sb.registerNewTeam(team);
                 sb.getTeam(team).setPrefix(playerTeam.getTabPrefix());
-                sb.getTeam(team).addPlayer(player);
-            }
-            Thread.currentThread().stop();
-        });
-        thread.start();
-    } */
-    public static void setTabPrefix(Player player) {
-        Thread thread = new Thread(() -> {
-            for (Player target : Bukkit.getOnlinePlayers()) {
-                Scoreboard sb = player.getScoreboard();
-                PlayerTeam playerTeam = getUserTeam(target);
-                String team = playerTeam.getId();
-                if (sb.getTeam(team) == null) {
-                    sb.registerNewTeam(team);
-                }
-                sb.getTeam(team).setPrefix("§7" + playerTeam.getTabPrefix()); // prefix is set to gray
-                sb.getTeam(team).addPlayer(target);
-            }
-            for (Player target : Bukkit.getOnlinePlayers()) {
-                if (target == player) {
-                    continue;
-                }
-                Scoreboard sb = target.getScoreboard();
-                PlayerTeam playerTeam = getUserTeam(player);
-                String team = playerTeam.getId();
-                if (sb.getTeam(team) == null) {
-                    sb.registerNewTeam(team);
-                }
-                sb.getTeam(team).setPrefix("§7" + playerTeam.getTabPrefix()); // prefix is set to gray
+                sb.getTeam(team).setSuffix(playerTeam.getTabSuffix());
+
+                sb.getTeam(team).setColor(ChatColor.GRAY);
                 sb.getTeam(team).addPlayer(player);
             }
             Thread.currentThread().stop();

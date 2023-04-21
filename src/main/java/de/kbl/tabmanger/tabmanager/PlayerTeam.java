@@ -11,12 +11,14 @@ public class PlayerTeam {
     private String permission;
     private String group;
     private String tabPrefix;
+    private String tabSuffix;
     private Integer id;
 
-    public PlayerTeam(String group, String tabPrefix, String chatPrefix, int id) {
+    public PlayerTeam(String group, String tabPrefix, String tabSuffix, String chatPrefix, int id) {
         this.permission = "core.group." + group;
         this.group = group;
         this.tabPrefix = tabPrefix;
+        this.tabSuffix = tabSuffix;
         this.id = Integer.valueOf(id);
     }
 
@@ -26,6 +28,7 @@ public class PlayerTeam {
         this.permission = "core.group." + strings[0];
         this.id = Integer.valueOf(strings[1]);
         this.tabPrefix = strings[2];
+        this.tabSuffix = strings[3];
     }
 
     public String getGroup() {
@@ -38,6 +41,9 @@ public class PlayerTeam {
 
     public String getTabPrefix() {
         return this.tabPrefix.replace('&', '\u00A7');
+    }
+    public String getTabSuffix() {
+        return this.tabSuffix.replace('&', '\u00A7');
     }
 
     public void setTabPrefix(String tabPrefix) {
